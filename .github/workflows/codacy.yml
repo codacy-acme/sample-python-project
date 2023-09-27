@@ -24,8 +24,10 @@ jobs:
           sudo apt-get -y -qq install openjdk-8-jdk openjdk-8-jre
           sudo apt-get -y install python3-pip
           pip3 install coverage
-          coverage run -m unittest xml
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r /home/runner/work/sample-python-project/sample-python-project/cobertura.xml
+          coverage run -m pytest -m unittest
+          coverage report
+          coverage xml
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
           docker run \
             --rm=true \
             --env CODACY_CODE="$CODACY_CODE" \
