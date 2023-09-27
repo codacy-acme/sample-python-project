@@ -24,7 +24,7 @@ jobs:
           sudo apt-get -y -qq install openjdk-8-jdk openjdk-8-jre
           pip3 install coverage
           pip3 install pytest
-          coverage run -m pytest -m unittest /home/runner/work/sample-python-project/sample-python-project
+          coverage run -m pytest -m unittest /home/runner/work/sample-python-project/sample-python-project/*.py
           coverage report
           coverage xml
           bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
