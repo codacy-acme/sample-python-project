@@ -22,8 +22,8 @@ jobs:
           export CODACY_CODE=$GITHUB_WORKSPACE
           sudo apt-get -qq update
           sudo apt-get -y -qq install openjdk-8-jdk openjdk-8-jre
-          sudo apt-get -y install python3-pip
           pip3 install coverage
+          pip3 install pytest
           coverage run -m pytest -m unittest
           coverage report
           coverage xml
