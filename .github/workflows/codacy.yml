@@ -27,7 +27,8 @@ jobs:
           coverage run -m pytest -m unittest /home/runner/work/sample-python-project/sample-python-project/*.py
           coverage report /home/runner/work/sample-python-project/sample-python-project/*.py
           coverage xml
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
+          echo $?
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r /home/runner/work/sample-python-project/sample-python-project/coverage.xml
           docker run \
             --rm=true \
             --env CODACY_CODE="$CODACY_CODE" \
