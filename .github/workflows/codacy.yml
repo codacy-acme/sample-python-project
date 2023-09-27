@@ -24,7 +24,17 @@ jobs:
           sudo apt-get -y -qq install openjdk-8-jdk openjdk-8-jre
           pip3 install coverage
           pip3 install pytest
-          sudo coverage run -m pytest -m unittest /home/runner/work/sample-python-project/sample-python-project/*.py
-          sudo coverage report /home/runner/work/sample-python-project/sample-python-project/*.py
-          sudo coverage xml -o /home/runner/work/sample-python-project/sample-python-project/coverage.xml
+          set -x
+          coverage run -m pytest -m unittest /home/runner/work/sample-python-project/sample-python-project/*.py
+          coverage report /home/runner/work/sample-python-project/sample-python-project/*.py
+          coverage xml -o /home/runner/work/sample-python-project/sample-python-project/coverage.xml
           echo $?
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r /home/runner/work/sample-python-project/sample-python-project/coverage.xml
+          docker run \
+            --rm=true \
+            --env CODACY_CODE="$CODACY_CODE" \
+            --volume /var/run/docker.sock:/var/run/docker.sock \
+            --volume "$CODACY_CODE":"$CODACY_CODE" \
+            --volume /tmp:/tmp \
+            codacy/codacy-analysis-cli \
+              analyze --tool pylint --upload --project-token ${{ secrets.CODACY_PROJECT_TOKEN }} --max-allowed-issues 99999 --commit-uuid $GITHUB_SHA
