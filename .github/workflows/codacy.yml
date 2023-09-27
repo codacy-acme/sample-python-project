@@ -31,7 +31,7 @@ jobs:
       - name: Run tests and collect coverage
         run: |
           # Replace with the actual paths to your test files and source files
-          coverage run -m pytest /home/runner/work/sample-python-project/sample-python-project
+          coverage run -m pytest /home/runner/work/sample-python-project/sample-python-project/*.py
           coverage report -m --fail-under=70  # You can set your desired coverage threshold here
 
       - name: Generate coverage XML report
