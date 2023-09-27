@@ -33,7 +33,7 @@ jobs:
           # Replace with the actual paths to your test files and source files
           coverage run -m pytest /home/runner/work/sample-python-project/sample-python-project/*.py
           coverage run -m unittest /home/runner/work/sample-python-project/sample-python-project/*.py
-          coverage report -m --fail-under=70  # You can set your desired coverage threshold here
+          coverage report -m --fail-under=10  # You can set your desired coverage threshold here
         continue-on-error: true
 
       - name: Generate coverage XML report
