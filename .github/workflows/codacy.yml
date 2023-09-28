@@ -39,7 +39,7 @@ jobs:
       - name: Generate coverage XML report
         run: |
           # Replace with the actual paths to your test files and source files
-          coverage xml -o /$GITHUB_WORKSPACE/coverage.xml
+          coverage xml -o $GITHUB_WORKSPACE/coverage.xml
 
       - name: Upload coverage report to Codacy
         env:
