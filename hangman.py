@@ -10,7 +10,7 @@ def start_game(player_name):
     word_list = ["apple", "banana", "cherry", "grape", "watermelon"]
     secret_word = random.choice(word_list)
     attempts = 0
-    max_attempts = 6
+    max_attempts = 5
 
     guessed_letters = []
 
