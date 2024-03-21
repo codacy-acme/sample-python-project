@@ -32,4 +32,3 @@ tinycss2==1.1.1
 toml==0.10.2
 urllib3==1.26.6
 webencodings==0.5.1
-xlsxwriter==3.0.3
