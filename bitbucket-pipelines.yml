@@ -1,0 +1,18 @@
+image: python:3.11
+
+pipelines:
+  default:
+    - step:
+        name: Build
+        script:
+          - apt-get update -qq
+          - apt-get install -y -qq openjdk-8-jdk openjdk-8-jre
+          - pip install coverage pytest
+          - coverage run -m pytest $BITBUCKET_CLONE_DIR/*.py
+          - coverage run -m unittest discover $BITBUCKET_CLONE_DIR/*.py
+          - coverage report -m --fail-under=10
+          - coverage xml -o $BITBUCKET_CLONE_DIR/coverage.xml
+          - pipe: atlassian/codacy-coverage-reporter:0.2.3
+            variables:
+              CODACY_PROJECT_TOKEN: $CODACY_PROJECT_TOKEN
+              REPORT_PATH: $BITBUCKET_CLONE_DIR/coverage.xml
